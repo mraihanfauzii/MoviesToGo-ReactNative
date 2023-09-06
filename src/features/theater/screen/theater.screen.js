@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { ActivityIndicator } from "react-native-paper";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { TheaterInfoCard } from "../components/theater-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.components";
@@ -24,8 +24,8 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export const TheatersScreen = () => {
-  const { isLoading, error, theaters } = useContext(TheatersContext);
+export const TheatersScreen = ({ navigation }) => {
+  const { isLoading, theaters } = useContext(TheatersContext);
   //console.log(error);
   return (
     <SafeArea>
@@ -34,14 +34,22 @@ export const TheatersScreen = () => {
           <Loading size={50} animating={true} />
         </LoadingContainer>
       )}
-      <Search/>
+      <Search />
       <TheaterList
         data={theaters}
         renderItem={({ item }) => {
           return (
-            <Spacer position="bottom" size="large">
-              <TheaterInfoCard theater={item} />
-            </Spacer>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("TheaterDetail", {
+                  theater: item,
+                })
+              }
+            >
+              <Spacer position="bottom" size="large">
+                <TheaterInfoCard theater={item} />
+              </Spacer>
+            </TouchableOpacity>
           );
         }}
         keyExtractor={(item) => item.name}

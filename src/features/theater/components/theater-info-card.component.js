@@ -26,7 +26,7 @@ export const TheaterInfoCard = ({ theater = {} }) => {
     isOpengNow = true,
     rating = 4,
     isClosedTemporarily = true,
-    placeId
+    placeId,
   } = theater;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -39,7 +39,12 @@ export const TheaterInfoCard = ({ theater = {} }) => {
         <Section>
           <Rating>
             {ratingArray.map((_, i) => (
-              <SvgXml key={`star-${placeId}-${i}`}xml={star} width={20} height={20} />
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>
