@@ -16,6 +16,7 @@ export const theatersTransform = ({ results = [] }) => {
     theater.photos = theater.photos.map((p) => {
       return mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];
     });
+
     return {
       ...theater,
       address: theater.vicinity,
@@ -23,5 +24,6 @@ export const theatersTransform = ({ results = [] }) => {
       isClosedTemporarily: theater.business_status === "CLOSED_TEMPORARILY",
     };
   });
+
   return camelize(mappedResults);
 };

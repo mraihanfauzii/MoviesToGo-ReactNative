@@ -1,5 +1,7 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
+
 import { theatersRequest, theatersTransform } from "./theater.service";
+
 import { LocationContext } from "../location/location.context";
 
 export const TheatersContext = createContext();
@@ -13,6 +15,7 @@ export const TheatersContextProvider = ({ children }) => {
   const retrieveTheaters = (loc) => {
     setIsLoading(true);
     setTheaters([]);
+
     setTimeout(() => {
       theatersRequest(loc)
         .then(theatersTransform)
@@ -24,7 +27,7 @@ export const TheatersContextProvider = ({ children }) => {
           setIsLoading(false);
           setError(err);
         });
-    }, 1000);
+    }, 2000);
   };
   useEffect(() => {
     if (location) {

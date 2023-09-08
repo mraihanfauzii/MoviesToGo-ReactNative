@@ -10,8 +10,11 @@ const TheaterStack = createStackNavigator();
 export const TheatersNavigator = () => {
   return (
     <TheaterStack.Navigator
-      headerMode="none"
-      screenOptions={{ ...TransitionPresets.ModalPresentationIOS.IOS }}
+      screenOptions={() => ({
+        headerShown: false,
+        gestureEnabled: true,
+        ...TransitionPresets.ModalPresentationIOS,
+      })}
     >
       <TheaterStack.Screen name="Theaters" component={TheatersScreen} />
       <TheaterStack.Screen

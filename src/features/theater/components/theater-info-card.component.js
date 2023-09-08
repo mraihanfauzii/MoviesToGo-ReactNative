@@ -14,6 +14,7 @@ import {
 } from "../components/theater-info-card.styles";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Favourite } from "../../../components/favourites/favourite.component";
 
 export const TheaterInfoCard = ({ theater = {} }) => {
   const {
@@ -33,6 +34,7 @@ export const TheaterInfoCard = ({ theater = {} }) => {
 
   return (
     <TheaterCard elevation={5}>
+      <Favourite theater={theater} />
       <TheaterCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="label">{name}</Text>

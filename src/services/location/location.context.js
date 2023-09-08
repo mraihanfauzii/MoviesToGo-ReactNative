@@ -17,7 +17,7 @@ export const LocationContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!keyword.length) {
-      //don't do anything
+      // don't do anything
       return;
     }
     locationRequest(keyword.toLowerCase())
@@ -30,7 +30,6 @@ export const LocationContextProvider = ({ children }) => {
       .catch((err) => {
         setIsLoading(false);
         setError(err);
-        console.log(err);
       });
   }, [keyword]);
 
