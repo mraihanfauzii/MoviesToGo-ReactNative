@@ -17,10 +17,10 @@ export const FavouritesContextProvider = ({ children }) => {
     }
   };
 
-  const loadFavourites = async () => {
+  const loadFavourites = async (uid) => {
     try {
-      const jsonValue = await AsyncStorage.getItem("@favourites");
-      return jsonValue != null ? setFavourites(JSON.parse(jsonValue)) : null;
+      const jsonValue = await AsyncStorage.getItem(`@favourites-${uid}`);
+      return jsonValue !== null ? setFavourites(JSON.parse(jsonValue)) : null;
     } catch (e) {
       console.log("error load favourites data ", e);
     }
@@ -37,13 +37,13 @@ export const FavouritesContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && user.uid) {
       loadFavourites(user.uid);
     }
   }, [user]);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.uid && favourites.length) {
       saveFavourites(favourites, user.uid);
     }
   }, [favourites, user]);

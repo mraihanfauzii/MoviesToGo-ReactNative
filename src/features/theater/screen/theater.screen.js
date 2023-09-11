@@ -1,21 +1,16 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import { ActivityIndicator } from "react-native-paper";
-import { FlatList, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { TheaterInfoCard } from "../components/theater-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.components";
 import { TheatersContext } from "../../../services/theater/theater.context";
 import { Search } from "../components/search.component";
-import { Favourite } from "../../../components/favourites/favourite.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
-
-const TheaterList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
+import { TheaterList } from "../components/theater-list.style";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -34,6 +29,7 @@ export const TheatersScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
+      <FadeInView></FadeInView>
       {isLoading && (
         <LoadingContainer>
           <Loading size={50} animating={true} />
@@ -61,7 +57,9 @@ export const TheatersScreen = ({ navigation }) => {
               }
             >
               <Spacer position="bottom" size="large">
-                <TheaterInfoCard theater={item} />
+                <FadeInView>
+                  <TheaterInfoCard theater={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );
