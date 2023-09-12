@@ -11,11 +11,11 @@ export const mocks = {
 };
 
 export const mockImages = [
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-oranges-ice-600x750.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2020/08/detail-of-pavlova-strawberry-piece-of-cake-600x800.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-baking-600x750.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/04/mae-mu-pancakes-600x750.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/02/messy-pizza-on-a-black-table-600x400.jpg",
-  "https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg",
+  "https://www.rukita.co/stories/wp-content/uploads/2022/11/cgv.jpg",
+  "https://awsimages.detik.net.id/community/media/visual/2022/11/08/cgv_169.jpeg?w=1200",
+  "https://images.bisnis.com/posts/2022/05/14/1533153/cgv8sah.jpg",
+  "https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/06/15160231/daftar-menu-xxi-cafe.jpg",
+  "https://bacaterus.com/wp-content/uploads/2020/08/Sejarah-Cinemaxx.jpg",
+  "https://static.platinumcineplex.co.id/images/theater/cinema/2x/CL-BTG.jpg",
+  "https://indonesiatimur.co/wp-content/uploads/2019/01/IMG-20190104-WA0044.jpg",
 ];
