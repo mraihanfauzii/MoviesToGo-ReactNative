@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 import { FlatList, StyleSheet, Text, ScrollView } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { View } from "react-native";
-import { Search } from "../components/search.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FadeInView } from "../../../components/animations/fade.animation";
@@ -30,9 +29,12 @@ const LoadingContainer = styled.View`
 
 export const MoviesScreen = ({ navigation }) => {
   const [activeGenre, setActiveGenre] = useState("All");
+  const [genres, setGenres] = useState([{ id: 10110, name: "All"}]);
+  
   const [nowPlayingMovies, setNowPlayingMovies] = useState({});
   const [upcomingMovies, setUpcomingMovies] = useState({});
-  const [genres, setGenres] = useState([{ id: 10110, name: "All" }]);
+  const [filteredNowPlayingMovies, setFilteredNowPlayingMovies] = useState({});
+  const [filteredUpcomingMovies, setFilteredUpcomingMovies] = useState({});
 
   useEffect(() => {
     getNowPlayingMovies().then((movieResponse) =>
@@ -46,6 +48,27 @@ export const MoviesScreen = ({ navigation }) => {
     );
   }, []);
 
+  useEffect(() => {
+    if (activeGenre === "All") {
+      setFilteredNowPlayingMovies(nowPlayingMovies.results);
+      setFilteredUpcomingMovies(upcomingMovies.results);
+    } else {
+      const filteredNowPlaying = nowPlayingMovies.results.filter(
+        (movie) =>
+          movie.genre_ids.includes(activeGenre.id) ||
+          activeGenre.name === "All"
+          
+      );
+      const filteredUpcoming = upcomingMovies.results.filter(
+        (movie) =>
+          movie.genre_ids.includes(activeGenre.id) ||
+          activeGenre.name === "All"
+      );
+      setFilteredNowPlayingMovies(filteredNowPlaying);
+      setFilteredUpcomingMovies(filteredUpcoming);
+    }
+  }, [activeGenre, nowPlayingMovies.results, upcomingMovies.results]);
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar
@@ -55,7 +78,6 @@ export const MoviesScreen = ({ navigation }) => {
       />
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Now Playing</Text>
-        <Text style={styles.headerSubTitle}>VIEW ALL</Text>
       </View>
       <View style={styles.genreListContainer}>
         <FlatList
@@ -69,15 +91,15 @@ export const MoviesScreen = ({ navigation }) => {
           renderItem={({ item }) => (
             <MovieGenreCard
               genreName={item.name}
-              active={item.name === activeGenre ? true : false}
-              onPress={setActiveGenre}
+              active={item.name === activeGenre.name}
+              onPress={() => setActiveGenre(item)}
             />
           )}
         />
       </View>
       <View>
         <FlatList
-          data={nowPlayingMovies.results}
+          data={filteredNowPlayingMovies}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
@@ -101,11 +123,10 @@ export const MoviesScreen = ({ navigation }) => {
       </View>
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Coming Soon</Text>
-        <Text style={styles.headerSubTitle}>VIEW ALL</Text>
       </View>
       <View>
         <FlatList
-          data={upcomingMovies.results}
+          data={filteredUpcomingMovies}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
